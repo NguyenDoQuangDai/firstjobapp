@@ -1,10 +1,14 @@
 package com.dai.firstjobapp.job;
 
+import com.dai.firstjobapp.company.Company;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 //import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 //@Table(name = "jobs_table")
@@ -18,6 +22,10 @@ public class Job {
     private String maxSalary;
     private String location;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id") // Tên cột khóa ngoại trong bảng jobs
+    private Company company; // Phải có tên field là "company"
+
     public Job() {
     }
 
@@ -28,6 +36,14 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Long getId() {
