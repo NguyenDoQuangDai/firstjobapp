@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 import com.dai.firstjobapp.company.Company;
 import com.dai.firstjobapp.company.CompanyRepository;
 import com.dai.firstjobapp.company.CompanyService;
+import com.dai.firstjobapp.job.Job;
 
 @Service
-public class CompanyServiceImpl implements CompanyService{
+public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
 
     public CompanyServiceImpl(CompanyRepository companyRepository) {
@@ -29,7 +30,17 @@ public class CompanyServiceImpl implements CompanyService{
             Company companyToUpdate = optionalCompany.get();
             companyToUpdate.setName(company.getName());
             companyToUpdate.setDescription(company.getDescription());
-            companyToUpdate.setJobs(company.getJobs());
+
+            if (companyToUpdate.getJobs() != null) {
+                companyToUpdate.getJobs().clear(); // orphanRemoval sẽ xóa job cũ
+            }
+
+            if (company.getJobs() != null) {
+                for (Job job : company.getJobs()) {
+                    job.setCompany(companyToUpdate); // gán đúng reference ngược
+                    companyToUpdate.getJobs().add(job); // thêm vào list của company
+                }
+            }
             companyRepository.save(companyToUpdate);
             return true;
         }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.dai.firstjobapp.job.Job;
 import com.dai.firstjobapp.review.Review;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -21,9 +21,10 @@ public class Company {
     private String name;
     private String description; 
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany (mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Job> jobs;
+    @JsonManagedReference
     @OneToMany (mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
