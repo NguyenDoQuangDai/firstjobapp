@@ -1,6 +1,7 @@
 package com.dai.firstjobapp.job;
 
 import com.dai.firstjobapp.company.Company;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class Job {
 
     @ManyToOne
     @JoinColumn(name = "company_id") // Tên cột khóa ngoại trong bảng jobs
+    @JsonBackReference
     private Company company; // Phải có tên field là "company"
 
     public Job() {

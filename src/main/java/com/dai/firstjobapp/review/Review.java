@@ -1,7 +1,7 @@
 package com.dai.firstjobapp.review;
 
 import com.dai.firstjobapp.company.Company;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,9 +19,10 @@ public class Review {
     private String content;
     private Double rating;
 
-    @JsonIgnore
+    
     @ManyToOne
     @JoinColumn(name = "company_id") // Tên cột khóa ngoại trong bảng reviews
+    @JsonBackReference
     private Company company; // Phải có tên field là "company"
     
     public Review() {
