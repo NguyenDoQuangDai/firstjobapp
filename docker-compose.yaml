@@ -2,8 +2,8 @@ services:
     postgres:
         container_name: postgres_container
         environment:
-            - POSTGRES_USER=chgvcode
-            - POSTGRES_PASSWORD=chgvcode
+            - POSTGRES_PASSWORD=Dai0978526675
+            # - POSTGRES_USER=postgres  # nếu muốn dùng user mặc định như lệnh docker run
             - PGDATA=/data/postgres
         volumes:
             - postgres:/data/postgres
@@ -13,11 +13,12 @@ services:
             - postgres
         restart: unless-stopped
         image: postgres
+
     pgadmin4:
         container_name: pgadmin_container
         environment:
-            - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
-            - PGADMIN_DEFAULT_PASSWORD=admin
+            - PGADMIN_DEFAULT_EMAIL=22028278@vnu.edu.vn
+            - PGADMIN_DEFAULT_PASSWORD=Dai0978526675
             - PGADMIN_CONFIG_SERVER_MODE=False
         volumes:
             - pgadmin:/var/lib/pgadmin
@@ -27,9 +28,11 @@ services:
             - postgres
         restart: unless-stopped
         image: dpage/pgadmin4
+
 networks:
     postgres:
         driver: bridge
+
 volumes:
     postgres:
     pgadmin:
